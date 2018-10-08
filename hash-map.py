@@ -22,5 +22,18 @@ class HashMap:
 
   # Getter | Retrieves key-value pair from array based on key. #
   def retrieve(self, key):
-    value = self.array[self.compressor(self.hash(key))]
-    return value
+    array_index = self.compressor(self.hash(key))
+    # Check if there's a key at this array index
+    current_array_value = self.array[array_index]
+    	
+    #If there's no key, then overwrite
+    if current_array_value is None:
+      self.array[array_index] = [key, value]
+        
+    #If keys are the same, then overwrite
+    if current_array_value[0] == key:
+      self.array[array_index] = [key, value]
+         
+    #If there's a different key, then return
+    #Later we'll need to have a LL to store the 2nd key
+    return
