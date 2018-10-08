@@ -31,9 +31,28 @@ class HashMap:
       self.array[array_index] = [key, value]
       return
     
-    # If key is different, cannot overwrite, will need to create LinkedList here
-    return  
-
+    # COLLISION EVENT | Key exists and is different from input key.
+    number_collisions = 1
+    
+    # Handle collision by replicate setting logic
+    while current_array_value[0] != key:
+      new_hash_code = self.hash(key, number_collisions)
+      new_array_index = self.compressor(new_hash_code)
+      current_array_value = self.array[new_array_index]
+      
+      # If new array value is empty, then assign key-value
+      if current_array_value is None:
+        self.array[new_array_index] = [key, value]
+        return
+      
+      # If new keys match, then overwrite value
+      if current_array_value[0] == key:
+        self.array[new_array_index] = [key, value]
+        return
+      
+      # SUB-COLLISION EVENT | Key exists and is different, increment CollisionCounter, repeat  
+      number_collisions += 1
+      
   # Getter | Retrieves key-value pair from array based on key. #
   def retrieve(self, key):
     array_index = self.compressor(self.hash(key))
