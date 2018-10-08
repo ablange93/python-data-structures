@@ -5,11 +5,12 @@ class HashMap:
     self.array_size = array_size
     self.array = [None for item in range(array_size)]
     
-  # Hash | User inputs a key which is converted into bytes
-  def hash(self, key):
+  # Hash function | User inputs a key which is converted into bytes
+  def hash(self, key, count_collisions=0):
     key_bytes = key.encode()
     hash_code = sum(key_bytes)
-    return hash_code
+    # Hash function now passes CollisionsCounter as part of open addressing system 
+    return hash_code + count_collisions
 
   # Compressor | Ensure hash code will fit inside the array
   def compressor(self, hash_code):
