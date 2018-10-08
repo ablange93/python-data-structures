@@ -17,7 +17,8 @@ class HashMap:
     
   # Setter | Assigns key-value pair to array. #
   def assign(self, key, value):
-    self.array[self.compressor(self.hash(key))] = value
+    array_index = self.compressor(self.hash(key))
+    self.array[array_index] = value
 
   # Getter | Retrieves key-value pair from array based on key. #
   def retrieve(self, key):
