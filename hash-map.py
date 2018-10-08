@@ -1,22 +1,22 @@
 # HASH MAP #
 class HashMap:
-  # Array | Create the array
+  # ARRAY | Create the array
   def __init__(self, array_size):
     self.array_size = array_size
     self.array = [None for item in range(array_size)]
     
-  # Hash function | User inputs a key which is converted into bytes
+  # HASH FUNCTION | User inputs a key which is converted into bytes
   def hash(self, key, count_collisions=0):
     key_bytes = key.encode()
     hash_code = sum(key_bytes)
     # Hash function now passes CollisionsCounter as part of open addressing system 
     return hash_code + count_collisions
 
-  # Compressor | Ensure hash code will fit inside the array
+  # COMPRESSOR | Ensure hash code will fit inside the array
   def compressor(self, hash_code):
     return hash_code % self.array_size
     
-  # Setter | Assigns key-value pair to array index
+  # SETTER | Assigns key-value pair to array index
   def assign(self, key, value):
     array_index = self.compressor(self.hash(key))
     current_array_value = self.array[array_index]
@@ -53,7 +53,7 @@ class HashMap:
       # SUB-COLLISION EVENT | Key exists and is different, increment CollisionCounter, repeat  
       number_collisions += 1
       
-  # Getter | Retrieves key-value pair from array based on key. #
+  # GETTER | Retrieves key-value pair from array based on key. #
   def retrieve(self, key):
     array_index = self.compressor(self.hash(key))
     possible_return_value = self.array[array_index]
