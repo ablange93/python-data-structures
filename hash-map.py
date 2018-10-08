@@ -15,25 +15,27 @@ class HashMap:
   def compressor(self, hash_code):
     return hash_code % self.array_size
     
-  # Setter | Assigns key-value pair to array. #
+  # Setter | Assigns key-value pair to array index. #
   def assign(self, key, value):
     array_index = self.compressor(self.hash(key))
-    self.array[array_index] = value
+    current_array_value = self.array[array_index]
+    
+    # Check if key-value pair exists at array index. #
+    if current_array_value is None:
+      self.array[array_index] = [key, value]
+      return
+    
+    # Check if key input matches existing key. #
+    if current_array_value[0] == key:
+      self.array[array_index] = [key, value]
+      return
+    
+    # Existing key is different, will add LinkedList to hold different keys #
+    # at this array index.   												#
+    return  
+    
 
   # Getter | Retrieves key-value pair from array based on key. #
   def retrieve(self, key):
     array_index = self.compressor(self.hash(key))
-    # Check if there's a key at this array index
-    current_array_value = self.array[array_index]
-    	
-    #If there's no key, then overwrite
-    if current_array_value is None:
-      self.array[array_index] = [key, value]
-        
-    #If keys are the same, then overwrite
-    if current_array_value[0] == key:
-      self.array[array_index] = [key, value]
-         
-    #If there's a different key, then return
-    #Later we'll need to have a LL to store the 2nd key
-    return
+    return self.array[array_index]
