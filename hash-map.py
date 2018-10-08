@@ -11,3 +11,6 @@ class HashMap:
     hash_code = sum(key_bytes)
     return hash_code
 
+  # Compressor | Ensure hash code will fit inside the array. #
+  def compressor(self, hash_code):
+    return hash_code % self.array_size
