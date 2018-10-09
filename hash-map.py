@@ -32,9 +32,9 @@ class HashMap:
       return
     
     # COLLISION EVENT | Key exists and is different from input key.
+    # Use open addressing to assign the value 
     number_collisions = 1
-    
-    # Handle collision by replicate setting logic
+
     while current_array_value[0] != key:
       new_hash_code = self.hash(key, number_collisions)
       new_array_index = self.compressor(new_hash_code)
@@ -50,7 +50,7 @@ class HashMap:
         self.array[new_array_index] = [key, value]
         return
       
-      # SUB-COLLISION EVENT | Key exists and is different, increment CollisionCounter, repeat  
+      # SUB-COLLISION EVENT | Increment counter and re-iterate
       number_collisions += 1
       
   # GETTER | Retrieves key-value pair from array based on key. #
@@ -66,6 +66,24 @@ class HashMap:
     if possible_return_value[0] == key:
       return possible_return_value[1]
     
-    # If key is different, then traverse LinkedList, find key match, and return value  
+    # COLLISION EVENT | Key exists and is different from input key.
+    # Use open addressing to retrieve the value 
+    retrieval_collisions = 1
+
+    while (possible_return_value != key):
+      new_hash_code = self.hash(key, retrieval_collisions)
+      retrieving_array_index = self.compressor(new_hash_code)
+      possible_return_value = self.array[retrieving_array_index]
+
+      # If array value is empty, return None
+      if possible_return_value is None:
+        return None
+	  
+	  # If keys match, return value
+      if possible_return_value[0] == key:
+        return possible_return_value[1]
+	  
+	  # SUB-COLLISION EVENT | Increment counter and re-iterate
+      number_collisions += 1
     return
       
