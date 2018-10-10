@@ -7,8 +7,7 @@ class HashMap:
     
   # HASH FUNCTION | User inputs a key which is converted into bytes
   def hash(self, key, count_collisions=0):
-    key_bytes = key.encode()
-    hash_code = sum(key_bytes)
+    hash_code = sum(key.encode())
     # Hash function now passes CollisionsCounter as part of open addressing system 
     return hash_code + count_collisions
 
