@@ -11,7 +11,7 @@ class HashMap:
     # Hash function now passes CollisionsCounter as part of open addressing system 
     return hash_code + count_collisions
 
-  # COMPRESSOR | Ensure hash code will fit inside the array
+  # COMPRESSION FUNCTION | Ensure hash code will fit inside the array
   def compressor(self, hash_code):
     return hash_code % self.array_size
     
